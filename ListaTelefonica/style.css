@@ -1,0 +1,21 @@
+.global{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.global td{
+    background-color: yellow;
+    padding: 5px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.form input, button{
+    border: 1px solid black;
+    margin: 3px;
+    padding: 3px;
+}

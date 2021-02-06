@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Lista Telefonica</title>
     <script src="../LibAngular/angular.js"></script>
     <script>
@@ -11,11 +12,11 @@
         angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
             $scope.app = "Lista Telefonica";
             $scope.contatos = [
-                {nome: "Creusa", telefone: "1144444444"},
-                {nome: "Marcos", telefone: "1133333333"},
-                {nome: "Lincon", telefone: "1122222222"}
+                { nome: "Creusa", telefone: "1144444444" },
+                { nome: "Marcos", telefone: "1133333333" },
+                { nome: "Lincon", telefone: "1122222222" }
             ];
-            $scope.addContato = function (contato){
+            $scope.addContato = function (contato) {
                 $scope.contatos.push(angular.copy(contato))
                 delete $scope.contato
             };
@@ -24,27 +25,25 @@
 </head>
 
 <body ng-controller="listaTelefonicaCtrl">
-    <div>
+    <div class="global">
         <h4 ng-bind="app"></h4>
         <!-- Pode ser usado o ng-bind ou o {{}} -->
-        {{app + ' E até é possivel contatenar' + 7*5}} 
-
         <table>
-        <tr>
-            <th>Nome</th>
-            <th>Telefone</th>
-        </tr>
-        <tr ng-repeat="contato in contatos">
-            <td>{{contato.nome}}</td>
-            <td>{{contato.telefone}}</td>
-        </tr>
-    </table>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr ng-repeat="contato in contatos">
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+            </tr>
+        </table>
 
-    <input type="text" ng-model="contato.nome" placeholder="Nome"/>
-    <input type="text" ng-model="contato.telefone" placeholder="Telefone"/>
-    <button ng-click="addContato(contato)">Cadastrar</button>
-    
-    {{nome}} {{Telefone}}
+        <div class="form">
+            <input type="text" ng-model="contato.nome" placeholder="Nome" />
+            <input type="text" ng-model="contato.telefone" placeholder="Telefone" />
+            <button ng-click="addContato(contato)">Cadastrar</button>
+        </div>
 
     </div>
 </body>
