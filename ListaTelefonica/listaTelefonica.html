@@ -16,6 +16,11 @@
                 { nome: "Marcos", telefone: "1133333333" },
                 { nome: "Lincon", telefone: "1122222222" }
             ];
+            $scope.operadoras = [
+                {nome:"Oi", codigo: 10},
+                {nome:"Vivo", codigo: 11},
+                {nome:"Tim", codigo: 12}
+            ];
             $scope.addContato = function (contato) {
                 $scope.contatos.push(angular.copy(contato))
                 delete $scope.contato
@@ -42,8 +47,11 @@
         <div class="form">
             <input type="text" ng-model="contato.nome" placeholder="Nome" />
             <input type="text" ng-model="contato.telefone" placeholder="Telefone" />
-            <button ng-click="addContato(contato)">Cadastrar</button>
+            <select ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras"></select>
+            <button ng-click="addContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora">Cadastrar</button>
         </div>
+
+        
 
     </div>
 </body>
