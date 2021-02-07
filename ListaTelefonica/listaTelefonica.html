@@ -17,13 +17,20 @@
                 { nome: "Lincon", telefone: "1122222222" }
             ];
             $scope.operadoras = [
-                {nome:"Oi", codigo: 10},
-                {nome:"Vivo", codigo: 11},
-                {nome:"Tim", codigo: 12}
+                { nome: "Oi", codigo: 10, categoria:"Celular" },
+                { nome: "Vivo", codigo: 11, categoria:"Celular" },
+                { nome: "Tim", codigo: 12, categoria:"Celular" },
+                { nome: "Gvt", codigo: 13, categoria:"Fixo" },
+                { nome: "Embratel", codigo: 14, categoria:"Fixo" },
             ];
             $scope.addContato = function (contato) {
                 $scope.contatos.push(angular.copy(contato))
                 delete $scope.contato
+            };
+            $scope.apagarContatos = function (contatos){
+                $scope.contatos = contatos.filter(function (contato){
+                    if(!contato.selecionado) return contato;
+                });
             };
         });
     </script>
@@ -37,21 +44,28 @@
             <tr>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Operadora</th>
             </tr>
-            <tr ng-repeat="contato in contatos">
+            <tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos">
+                <td> <input type="checkbox" ng-model="contato.selecionado" /> </td>
                 <td>{{contato.nome}}</td>
                 <td>{{contato.telefone}}</td>
+                <td>{{contato.operadora.nome}}</td>
             </tr>
         </table>
 
         <div class="form">
             <input type="text" ng-model="contato.nome" placeholder="Nome" />
             <input type="text" ng-model="contato.telefone" placeholder="Telefone" />
-            <select ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras"></select>
+            <select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+                <option value="">Selecione uma Operadora</option>
+            </select>
             <button ng-click="addContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.operadora">Cadastrar</button>
+            <button ng-click="apagarContatos(contatos)">Apagar Contatos</button>
         </div>
 
-        
+        <!-- <div ng-include="'../Components/footer.html'"></div> --> 
+        <!-- ^^chamada ajax^^ -->
 
     </div>
 </body>
